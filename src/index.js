@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import { createStore } from 'redux';
+
 const todos = (state = [], action) => {
   switch (action.type) {
     case 'ADD_TODO':
@@ -60,3 +62,5 @@ const todoApp = (state = {}, action) => {
     )
   };
 };
+
+const store = createStore(todoApp);
