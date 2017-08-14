@@ -45,7 +45,7 @@ const visibilityFilter = (
   switch (action.type) {
     case 'SET_VISIBILITY_FILTER':
       return action.filter;
-    deafult:
+    default:
       return state;
   }
 };
