@@ -49,6 +49,14 @@ const Link = ({
 };
 
 class FilterLink extends Component {
+  componentDidMount() {
+    this.unsubsribe = this.props.store.subscribe(() =>
+      this.forceUpdate()
+    );
+  }
+  componentWillUnmount() {
+    this.unsubsribe();
+  }
   render() {
     const props = this.props;
     const state = this.props.store.getState();
