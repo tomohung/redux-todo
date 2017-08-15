@@ -1,27 +1,24 @@
 import React from 'react';
 import { Component } from 'react';
 
-export const Footer = ({store}) => (
+export const Footer = () => (
   <p>
     Show:
     {' '}
     <FilterLink
       filter='SHOW_ALL'
-      store={store}
     >
       All
     </FilterLink>
     {' '}
     <FilterLink
       filter='SHOW_ACTIVE'
-      store={store}
     >
       Active
     </FilterLink>
     {' '}
     <FilterLink
       filter='SHOW_COMPLETED'
-      store={store}
     >
       Completed
     </FilterLink>
@@ -50,7 +47,7 @@ const Link = ({
 
 class FilterLink extends Component {
   componentDidMount() {
-    const { store } = this.props;
+    const { store } = this.context;
     this.unsubsribe = store.subscribe(() =>
       this.forceUpdate()
     );
@@ -60,7 +57,7 @@ class FilterLink extends Component {
   }
   render() {
     const props = this.props;
-    const { store } = props;
+    const { store } = this.context;
     const state = store.getState();
 
     return (
@@ -79,4 +76,8 @@ class FilterLink extends Component {
       </Link>
     )
   }
+}
+
+FilterLink.contextTypes = {
+  store: React.PropTypes.object
 }
