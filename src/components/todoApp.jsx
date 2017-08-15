@@ -3,6 +3,8 @@ import { Component } from 'react';
 import { FilterLink } from './filterLink';
 
 let nextTodoId = 0;
+
+// Container Component
 export class TodoApp extends Component {
   render() {
     const {
@@ -18,20 +20,15 @@ export class TodoApp extends Component {
 
     return (
       <div>
-        <input ref={node => {
-            this.input = node;
-        }} />
-        <button onClick={() => {
+        <AddTodo
+          onAddClick={text =>
             store.dispatch({
               type: 'ADD_TODO',
-              text: this.input.value,
-              id: nextTodoId++
-            });
-            this.input.value = '';
-            this.input.focus();
-        }}>
-          Add Todo
-        </button>
+              id: nextTodoId++,
+              text
+            })
+          }
+        />
         <TodoList
           todos={visibleTodos}
           onTodoClick={id =>
@@ -105,6 +102,27 @@ const Todo = ({
   </li>
 );
 
+const AddTodo = ({
+  onAddClick
+}) => {
+  let input;
+  return (
+    <div>
+      <input ref={node => {
+          input = node;
+      }} />
+      <button onClick={() => {
+          onAddClick(input.value);
+          input.value = '';
+          input.focus();
+      }} >
+        Add Todo
+      </button>
+    </div>
+  )
+}
+
+// Helpers
 const getVisibleTodos = (
   todos,
   filter
