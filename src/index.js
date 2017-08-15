@@ -14,14 +14,9 @@ const todoApp = combineReducers({
 
 const store = createStore(todoApp);
 
-const render = () => {
-  ReactDOM.render(
-    <TodoApp
-      store={store}
-      />,
-    document.getElementById('root')
-  );
-};
-
-store.subscribe(render);
-render();
+ReactDOM.render(
+  <TodoApp
+    store={store}
+  />,
+  document.getElementById('root')
+);
