@@ -1,23 +1,14 @@
 import React from 'react';
-import { Component } from 'react';
 import { Footer } from './footer';
 
 let nextTodoId = 0;
 
 // Container Component
-export class TodoApp extends Component {
-  render() {
-    const {
-      todos,
-      visibilityFilter,
-      store
-    } = this.props;
-
-    const visibleTodos = getVisibleTodos(
-      todos,
-      visibilityFilter
-    );
-
+export const TodoApp = ({
+  todos,
+  visibilityFilter,
+  store
+}) => {
     return (
       <div>
         <AddTodo
@@ -30,7 +21,12 @@ export class TodoApp extends Component {
           }
         />
         <TodoList
-          todos={visibleTodos}
+          todos={
+            getVisibleTodos(
+              todos,
+              visibilityFilter
+            )
+          }
           onTodoClick={id =>
             store.dispatch({
               type: 'TOGGLE_TODO',
@@ -48,7 +44,6 @@ export class TodoApp extends Component {
         />
       </div>
     )
-  };
 };
 
 // Presentational Components
