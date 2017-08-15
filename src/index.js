@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { todos } from './reducers/todos';
 import { visibilityFilter } from './reducers/visibilityFilter';
 
-import { TodoApp } from './components/todoApp';
+import { TodoApp } from './components/TodoApp';
 
 const todoApp = combineReducers({
   todos,
