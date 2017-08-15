@@ -1,55 +1,72 @@
 import React from 'react';
+import { Component } from 'react';
 
-export const Footer = ({
-  visibilityFilter,
-  onFilterClick
-}) => (
+export const Footer = ({store}) => (
   <p>
     Show:
     {' '}
     <FilterLink
       filter='SHOW_ALL'
-      currentFilter={visibilityFilter}
-      onClick={onFilterClick}
+      store={store}
     >
       All
     </FilterLink>
     {' '}
     <FilterLink
       filter='SHOW_ACTIVE'
-      currentFilter={visibilityFilter}
-      onClick={onFilterClick}
+      store={store}
     >
       Active
     </FilterLink>
     {' '}
     <FilterLink
       filter='SHOW_COMPLETED'
-      currentFilter={visibilityFilter}
-      onClick={onFilterClick}
+      store={store}
     >
       Completed
     </FilterLink>
   </p>
 )
 
-const FilterLink = ({
-  filter,
-  currentFilter,
+const Link = ({
+  active,
   children,
   onClick
 }) => {
-  if (filter === currentFilter) {
+  if (active) {
     return <span>{children}</span>
   }
   return (
     <a href={'#' + children}
       onClick={e => {
           e.preventDefault();
-          onClick(filter);
+          onClick();
       }}
     >
       {children}
     </a>
   )
+};
+
+class FilterLink extends Component {
+  render() {
+    const props = this.props;
+    const state = this.props.store.getState();
+
+    return (
+      <Link
+        active={
+          props.filter === state.visibilityFilter
+        }
+        onClick={() =>
+          this.props.store.dispatch({
+            type: 'SET_VISIBILITY_FILTER',
+            filter: props.filter
+          })
+        }
+      >
+      {props.children}
+      </Link>
+    )
+  }
 }
