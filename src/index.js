@@ -12,11 +12,9 @@ const todoApp = combineReducers({
   visibilityFilter
 })
 
-const store = createStore(todoApp);
-
 ReactDOM.render(
   <TodoApp
-    store={store}
+    store={createStore(todoApp)}
   />,
   document.getElementById('root')
 );

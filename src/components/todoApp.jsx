@@ -6,17 +6,17 @@ import { AddTodo } from './addTodo';
 export const TodoApp = ({
   store
 }) => {
-    return (
-      <div>
-        <AddTodo
-          store={store}
-        />
-        <VisibleTodoList
-          store={store}
-        />
-        <Footer
-          store={store}
-        />
-      </div>
-    )
+  return (
+    <div>
+      <AddTodo
+        store={store}
+      />
+      <VisibleTodoList
+        store={store}
+      />
+      <Footer
+        store={store}
+      />
+    </div>
+  )
 };

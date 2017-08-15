@@ -50,7 +50,8 @@ const Link = ({
 
 class FilterLink extends Component {
   componentDidMount() {
-    this.unsubsribe = this.props.store.subscribe(() =>
+    const { store } = this.props;
+    this.unsubsribe = store.subscribe(() =>
       this.forceUpdate()
     );
   }
@@ -59,7 +60,8 @@ class FilterLink extends Component {
   }
   render() {
     const props = this.props;
-    const state = this.props.store.getState();
+    const { store } = props;
+    const state = store.getState();
 
     return (
       <Link
@@ -67,7 +69,7 @@ class FilterLink extends Component {
           props.filter === state.visibilityFilter
         }
         onClick={() =>
-          this.props.store.dispatch({
+          store.dispatch({
             type: 'SET_VISIBILITY_FILTER',
             filter: props.filter
           })

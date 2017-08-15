@@ -3,7 +3,8 @@ import { Component } from 'react';
 
 export class VisibleTodoList extends Component {
   componentDidMount() {
-    this.unsubscribe = this.props.store.subscribe(() =>
+    const { store } = this.props;
+    this.unsubscribe = store.subscribe(() =>
       this.forceUpdate()
     );
   }
@@ -14,7 +15,8 @@ export class VisibleTodoList extends Component {
 
   render() {
     const props = this.props;
-    const state = this.props.store.getState();
+    const { store } = props;
+    const state = store.getState();
     return (
       <TodoList
         todos={
@@ -24,7 +26,7 @@ export class VisibleTodoList extends Component {
           )
         }
         onTodoClick={id =>
-          this.props.store.dispatch({
+          store.dispatch({
             type: 'TOGGLE_TODO',
             id
           })
