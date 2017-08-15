@@ -4,8 +4,6 @@ import { VisibleTodoList } from './visibleTodoList';
 import { AddTodo } from './addTodo';
 
 export const TodoApp = ({
-  todos,
-  visibilityFilter,
   store
 }) => {
     return (

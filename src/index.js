@@ -17,7 +17,6 @@ const store = createStore(todoApp);
 const render = () => {
   ReactDOM.render(
     <TodoApp
-      {...store.getState()}
       store={store}
       />,
     document.getElementById('root')
