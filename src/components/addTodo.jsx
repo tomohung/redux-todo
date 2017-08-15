@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 let nextTodoId = 0;
 export const AddTodo = (props, { store }) => {
@@ -24,5 +25,5 @@ export const AddTodo = (props, { store }) => {
 }
 
 AddTodo.contextTypes = {
-  store: React.PropTypes.object
+  store: PropTypes.object
 }

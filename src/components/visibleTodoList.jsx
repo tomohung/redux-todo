@@ -1,5 +1,6 @@
 import React from 'react';
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export class VisibleTodoList extends Component {
   componentDidMount() {
@@ -35,7 +36,7 @@ export class VisibleTodoList extends Component {
   }
 }
 VisibleTodoList.contextTypes = {
-  store: React.PropTypes.object
+  store: PropTypes.object
 }
 
 const TodoList = ({

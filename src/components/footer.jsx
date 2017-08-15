@@ -1,5 +1,6 @@
 import React from 'react';
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export const Footer = () => (
   <p>
@@ -79,5 +80,5 @@ class FilterLink extends Component {
 }
 
 FilterLink.contextTypes = {
-  store: React.PropTypes.object
+  store: PropTypes.object
 }
