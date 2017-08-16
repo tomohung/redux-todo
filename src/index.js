@@ -9,14 +9,18 @@ import { visibilityFilter } from './reducers/visibilityFilter';
 
 import { TodoApp } from './components/TodoApp';
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 const todoApp = combineReducers({
   todos,
   visibilityFilter
 })
 
 ReactDOM.render(
-  <Provider store={createStore(todoApp)}>
-    <TodoApp />
-  </Provider>,
+  <MuiThemeProvider>
+    <Provider store={createStore(todoApp)}>
+      <TodoApp />
+    </Provider>
+  </MuiThemeProvider>,
   document.getElementById('root')
 );
