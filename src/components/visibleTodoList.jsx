@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { toggleTodo } from '../actions/toggleTodo';
+import { SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED } from '../constants/ActionTypes';
 
 const TodoList = ({
   todos,
@@ -39,13 +41,13 @@ const getVisibleTodos = (
   filter
 ) => {
   switch (filter) {
-    case 'SHOW_ALL':
+    case SHOW_ALL:
       return todos;
-    case 'SHOW_COMPLETED':
+    case SHOW_COMPLETED:
       return todos.filter(
         t => t.completed
       );
-    case 'SHOW_ACTIVE':
+    case SHOW_ACTIVE:
       return todos.filter(
         t => !t.completed
       );
@@ -67,10 +69,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onTodoClick: (id) => {
-      dispatch({
-        type: 'TOGGLE_TODO',
-        id
-      })
+      dispatch(toggleTodo(id));
     }
   };
 }

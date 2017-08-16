@@ -1,8 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { addTodo } from '../actions/addTodo';
 
-let nextTodoId = 0;
 export let AddTodo = ({ dispatch }) => {
   let input;
   return (
@@ -11,11 +10,7 @@ export let AddTodo = ({ dispatch }) => {
           input = node;
       }} />
       <button onClick={() => {
-          dispatch({
-            type: 'ADD_TODO',
-            id: nextTodoId++,
-            text: input.value
-          })
+          dispatch(addTodo(input.value));
           input.value = '';
           input.focus();
       }} >

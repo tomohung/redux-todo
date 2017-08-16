@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { setVisibilityFilter } from '../actions/setVisibilityFilter';
 
 export const Footer = () => (
   <p>
@@ -62,15 +63,14 @@ const mapDispatchToProps = (
 ) => {
   return {
     onClick: () => {
-      dispatch({
-        type: 'SET_VISIBILITY_FILTER',
-        filter: ownProps.filter
-      });
+      dispatch(
+        setVisibilityFilter(ownProps.filter)
+      );
     }
   };
 }
 
-export const FilterLink = connect(
+const FilterLink = connect(
   mapStateToProps,
   mapDispatchToProps
 )(Link);
