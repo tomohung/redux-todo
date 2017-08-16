@@ -1,6 +1,5 @@
 import React from 'react';
-import { Component } from 'react';
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 export const Footer = () => (
   <p>
@@ -46,39 +45,32 @@ const Link = ({
   )
 };
 
-class FilterLink extends Component {
-  componentDidMount() {
-    const { store } = this.context;
-    this.unsubsribe = store.subscribe(() =>
-      this.forceUpdate()
-    );
+const mapStateToProps = (
+  state,
+  ownProps
+) => {
+  return {
+    active:
+  ownProps.filter ===
+    state.visibilityFilter
   }
-  componentWillUnmount() {
-    this.unsubsribe();
-  }
-  render() {
-    const props = this.props;
-    const { store } = this.context;
-    const state = store.getState();
+};
 
-    return (
-      <Link
-        active={
-          props.filter === state.visibilityFilter
-        }
-        onClick={() =>
-          store.dispatch({
-            type: 'SET_VISIBILITY_FILTER',
-            filter: props.filter
-          })
-        }
-      >
-      {props.children}
-      </Link>
-    )
-  }
+const mapDispatchToProps = (
+  dispatch,
+  ownProps
+) => {
+  return {
+    onClick: () => {
+      dispatch({
+        type: 'SET_VISIBILITY_FILTER',
+        filter: ownProps.filter
+      });
+    }
+  };
 }
 
-FilterLink.contextTypes = {
-  store: PropTypes.object
-}
+export const FilterLink = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Link);
