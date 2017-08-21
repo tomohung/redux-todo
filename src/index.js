@@ -11,21 +11,21 @@ import { TodoApp } from './components/TodoApp';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { loadState, saveState } from './localStorage';
+import throttle from 'lodash/throttle';
 
 const todoApp = combineReducers({
   todos,
   visibilityFilter
 })
 
-const persistedState = {
-  todos: loadState().todos
-}
+const persistedState = loadState();
+
 const store = createStore(todoApp, persistedState);
-store.subscribe(() => {
+store.subscribe(throttle(() => {
   saveState({
     todos: store.getState().todos
   })
-})
+}, 1000))
 
 ReactDOM.render(
   <MuiThemeProvider>
