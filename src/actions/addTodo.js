@@ -1,10 +1,10 @@
 import { ADD_TODO } from '../constants/ActionTypes';
+import { v4 } from 'node-uuid';
 
-let nextTodoId = 0;
 export const addTodo = (text) => {
   return {
     type: ADD_TODO,
-    id: nextTodoId++,
+    id: v4(),
     text
   }
 }
