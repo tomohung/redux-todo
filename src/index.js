@@ -10,15 +10,26 @@ import { visibilityFilter } from './reducers/visibilityFilter';
 import { TodoApp } from './components/TodoApp';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { loadState, saveState } from './localStorage';
 
 const todoApp = combineReducers({
   todos,
   visibilityFilter
 })
 
+const persistedState = {
+  todos: loadState().todos
+}
+const store = createStore(todoApp, persistedState);
+store.subscribe(() => {
+  saveState({
+    todos: store.getState().todos
+  })
+})
+
 ReactDOM.render(
   <MuiThemeProvider>
-    <Provider store={createStore(todoApp)}>
+    <Provider store={store}>
       <TodoApp />
     </Provider>
   </MuiThemeProvider>,
