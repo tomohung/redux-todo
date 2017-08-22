@@ -7,6 +7,7 @@ import {List, ListItem} from 'material-ui/List';
 import ContentInbox from 'material-ui/svg-icons/content/inbox';
 import {pinkA200, black200} from 'material-ui/styles/colors';
 import { withRouter } from 'react-router';
+import { getVisibleTodos } from '../reducers/todoApp';
 
 const TodoList = ({
   todos,
@@ -40,31 +41,10 @@ const Todo = ({
     }}/>
 );
 
-// Helpers
-const getVisibleTodos = (
-  todos,
-  filter
-) => {
-  switch (filter) {
-    case 'all':
-      return todos;
-    case 'completed':
-      return todos.filter(
-        t => t.completed
-      );
-    case 'active':
-      return todos.filter(
-        t => !t.completed
-      );
-    default:
-      throw new Error(`Unknow filter: ${filter}`);
-  }
-}
-
 // Component
 const mapStateToProps = (state, { params }) => ({
   todos: getVisibleTodos(
-    state.todos,
+    state,
     params.filter || 'all'
   )
 })
