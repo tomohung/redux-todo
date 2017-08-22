@@ -6,6 +6,7 @@ import { SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED } from '../constants/ActionTypes'
 import {List, ListItem} from 'material-ui/List';
 import ContentInbox from 'material-ui/svg-icons/content/inbox';
 import {pinkA200, black200} from 'material-ui/styles/colors';
+import { withRouter } from 'react-router';
 
 const TodoList = ({
   todos,
@@ -45,26 +46,26 @@ const getVisibleTodos = (
   filter
 ) => {
   switch (filter) {
-    case SHOW_ALL:
+    case 'all':
       return todos;
-    case SHOW_COMPLETED:
+    case 'completed':
       return todos.filter(
         t => t.completed
       );
-    case SHOW_ACTIVE:
+    case 'active':
       return todos.filter(
         t => !t.completed
       );
     default:
-      return todos;
+      throw new Error(`Unknow filter: ${filter}`);
   }
 }
 
 // Component
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, { params }) => ({
   todos: getVisibleTodos(
     state.todos,
-    state.visibilityFilter
+    params.filter || 'all'
   )
 })
 
@@ -74,7 +75,7 @@ const mapDispatchToProps = (dispatch) => ({
   }
 })
 
-export const VisibleTodoList = connect(
+export const VisibleTodoList = withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(TodoList)
+)(TodoList));
